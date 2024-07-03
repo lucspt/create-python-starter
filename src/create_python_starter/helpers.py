@@ -78,10 +78,9 @@ def create_pyproject_toml_file(
                 "dependencies = []\n",
                 'readme = "README.md"\n',
                 'requires-python = ">= 3.12"\n',
+                "\n",
             ]
         )
-
-        f.write("\n")
 
         # build-system
         f.writelines(
@@ -89,10 +88,9 @@ def create_pyproject_toml_file(
                 "[build-system]\n",
                 'requires = ["hatchling"]\n',
                 'build-backend = "hatchling.build"\n',
+                "\n",
             ]
         )
-
-        f.write("\n")
 
         # rye
         f.writelines(
@@ -104,10 +102,9 @@ def create_pyproject_toml_file(
                 '   "mypy>=1.10.1",\n',
                 '   "pytest-cov>=5.0.0",\n',
                 "]\n",
+                "\n",
             ]
         )
-
-        f.write("\n")
 
         # rye scripts
         lines = ["[tool.rye.scripts]\n"]
@@ -122,15 +119,17 @@ def create_pyproject_toml_file(
         )
         f.writelines(lines)
 
+        # pytest optins
+        f.writelines(["[tool.pytest.ini_options]\n", 'testpaths = ["tests"]\n', "\n"])
+
         # hatch metadata
         f.writelines(
             [
                 "[tool.hatch.metadata]\n",
                 "allow-direct-references = true\n",
+                "\n",
             ]
         )
-
-        f.write("\n")
 
         # wheel build target
         lines = [
