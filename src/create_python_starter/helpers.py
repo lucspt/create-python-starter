@@ -10,7 +10,7 @@ def is_valid_folder(root: Path) -> bool:
     """Checks if a folder is valid for template creation, given the path to it.
 
     Args:
-        - root (Path): A `pathlib.Path` Posix Path pointing to the folder location
+        root (Path): A `pathlib.Path` Posix Path pointing to the folder location
 
     """
     conflicts = list(root.iterdir())
@@ -40,8 +40,8 @@ def copy(
     """Creates (copies) all template files at the given `dest`.
 
     Args:
-        - template ("flask" | "python" | "common"): The template to copy.
-        - dest (Path): The posix path pointing to the destination of the copy operation.
+        template ("flask" | "python" | "common"): The template to copy.
+        dest (Path): The posix path pointing to the destination of the copy operation.
     """
     template_dir = Path(__file__).resolve().parent / "templates" / template
     relative_dest_dir = Path(dest).resolve()
@@ -164,7 +164,7 @@ def create_destination_directory(
     """Creates and returns the new project's directory, w.r.t the requested template.
 
     Args:
-    - template (TemplateType): The template this directory will be created with.
+        template (TemplateType): The template this directory will be created with.
 
     Returns: The project directory's Posix Path.
     """
