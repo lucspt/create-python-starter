@@ -55,9 +55,9 @@ rye run format
 rye run dev
 
 # run test coverage
-rye run coverage 
+rye run test 
 # OR for html report
-rye run coverage-html
+rye run test-ui
 ```
 
 ## Coding guidelines
