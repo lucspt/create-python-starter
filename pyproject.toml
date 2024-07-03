@@ -28,13 +28,14 @@ dev-dependencies = [
 ]
 
 [tool.rye.scripts]
-format = { chain = [
-   "lint:ruff",
+check = { chain = [
+   "ruff check --fix --quiet",
    "format:ruff",
 ]}
 "format:ruff" = "ruff format"
 
-"lint:ruff" = "ruff check --fix --quiet"
+lint = "ruff check --fix"
+
 
 [tool.hatch.metadata]
 allow-direct-references = true

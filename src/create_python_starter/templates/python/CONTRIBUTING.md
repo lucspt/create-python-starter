@@ -45,14 +45,11 @@ You can then run scripts using rye run python script.py.
 ### Commonly used rye scripts
 
 ```bash
-# run linter (ruff)
-rye run lint
-
-# run formatter (ruff)
-rye run format
+# run linter and formatter (ruff)
+rye run check
 
 # run test coverage
-rye run test
+rye run test 
 # OR for html report
 rye run test-ui
 ```
@@ -106,7 +103,7 @@ The optional scope should be the names of the project directories it is affectin
 If adding more than one scope, separate them by commons, e.g.`lib,tests`
 
 At times it is not completely necessary to add a scope, one example would be a commit message like:
-`style: add missing semicolons`, for a commit that affected multiple directories. 
+`style: change single quotes to double quotes`, for a commit that affected multiple directories. 
 
 ### Subject 
 

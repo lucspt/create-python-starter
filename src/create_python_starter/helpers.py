@@ -110,13 +110,13 @@ def create_pyproject_toml_file(
             [
                 f'test = {{ cmd = "pytest --cov={cov_folder} tests/" }}\n',
                 f'test-ui = {{ cmd = "pytest --cov={cov_folder} --cov-report=html tests/" }}\n',
-                "format = { chain = [\n",
-                '   "lint:ruff",\n',
+                "check = { chain = [\n",
+                '   "ruff check --fix --quiet",\n',
                 '   "format:ruff",\n',
                 "]}\n",
                 '"format:ruff" = "ruff format"\n',
                 "\n",
-                '"lint:ruff" = "ruff check --fix --quiet"\n',
+                '"lint" = "ruff check --fix"\n',
                 "\n",
             ]
         )
