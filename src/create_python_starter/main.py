@@ -1,8 +1,13 @@
 import click
 from pathlib import Path
-from .helpers import is_valid_folder, copy, create_destination_directory
+from .helpers import (
+    is_valid_folder,
+    create_git_repo,
+    install_dependencies,
+    create_pyproject_toml_file,
+)
 import sys
-from shutil import rmtree
+from shutil import rmtree, copytree
 from .types import TemplateType
 
 PYTHON_TEMPLATE = "python"
@@ -17,6 +22,7 @@ FLASK_TEMPALTE = "flask"
     prompt="What template would you like to create?",
 )
 def create_app(name: str, template: TemplateType) -> None:
+    """Creates a project app with the `name` and `template` arguments given in the cli command"""
     project_path = Path(name).resolve()
 
     try:
@@ -24,17 +30,31 @@ def create_app(name: str, template: TemplateType) -> None:
             sys.exit(1)
 
         click.echo("Creating project directory...")
-        copy(template="common", dest=str(project_path))
+        templates_dir = Path(__file__).resolve().parent / "templates"
 
-        dest_dir = create_destination_directory(
+        copytree(templates_dir / "common", str(project_path))
+
+        template_dir = templates_dir / template
+        copytree(template_dir, project_path, dirs_exist_ok=True)
+
+        package_name = None
+        if template == "python":
+            package_name = name.replace("-", "_").replace(" ", "_")
+            src = Path(project_path / "src")
+            Path(src / "[package]").replace(src / package_name)
+
+        create_pyproject_toml_file(
+            project_path,
+            app_name=project_path.name,
             template=template,
-            project_path=project_path,
-            package_name=None
-            if template == "flask"
-            else name.replace("-", "_").replace(" ", "_"),
+            package_dir_name=package_name,
         )
 
-        copy(template=template, dest=str(dest_dir), dirs_exist_ok=True)
+        click.echo("Initializing git repository...")
+        create_git_repo(project_directory=project_path)
+
+        click.echo("Installing depedencies...")
+        install_dependencies(project_directory=project_path)
 
     except Exception as e:
         click.echo(str(e))
