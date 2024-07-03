@@ -1,0 +1,33 @@
+[project]
+name = "create-python-starter"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "lucspt", email = "149544385+lucspt@users.noreply.github.com" }
+]
+dependencies = [
+    "click>=8.1.7",
+]
+readme = "README.md"
+requires-python = ">= 3.12"
+
+[project.scripts]
+create_python_starter = "create_python_starter.main:create_app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "mypy>=1.10.1",
+    "pytest-cov>=5.0.0",
+    "pre-commit>=3.7.1",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/create_python_starter"]
