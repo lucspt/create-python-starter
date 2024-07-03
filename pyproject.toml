@@ -36,6 +36,8 @@ check = { chain = [
 
 lint = "ruff check --fix"
 
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
 
 [tool.hatch.metadata]
 allow-direct-references = true

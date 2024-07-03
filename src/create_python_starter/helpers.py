@@ -135,6 +135,9 @@ def create_pyproject_toml_file(
         # pytest optins
         f.writelines(["[tool.pytest.ini_options]\n", 'testpaths = ["tests"]\n', "\n"])
 
+        # ruff options
+        f.writelines(["[tool.ruff.format]\n", "docstring-code-format = true\n", "\n"])
+
         # hatch metadata
         f.writelines(
             [
