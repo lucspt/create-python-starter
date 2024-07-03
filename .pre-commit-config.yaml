@@ -11,6 +11,6 @@ repos:
     - id: format 
       name: format 
       description: Running formatter
-      entry: ruff format --all --quiet
+      entry: rye format --all --quiet
       types_or: [python, pyi]
       language: python
