@@ -18,6 +18,7 @@ wheels/
 # unit tests / coverage
 htmlcov/
 .coverage*
+.pytest_cache/
 
 # virtual environments 
 .venv/
