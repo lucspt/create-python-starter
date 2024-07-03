@@ -66,6 +66,10 @@ def create_pyproject_toml_file(
         )
     file_location = root / "pyproject.toml"
     file_location.touch(exist_ok=True)
+    if template == "flask":
+        dependencies = ["dependencies = [\n", '   "flask>=3.0.3",\n', "]\n"]
+    else:
+        dependencies = ["dependencies = []\n"]
     with open(file_location, "w") as f:
         # project meta
         f.writelines(
@@ -75,7 +79,7 @@ def create_pyproject_toml_file(
                 'version = "0.1.0"\n',
                 'description = "Add your description here"\n',
                 "authors = []\n",
-                "dependencies = []\n",
+                *dependencies,
                 'readme = "README.md"\n',
                 'requires-python = ">= 3.12"\n',
                 "\n",
@@ -108,12 +112,14 @@ def create_pyproject_toml_file(
 
         # rye scripts
         lines = ["[tool.rye.scripts]\n"]
+        cov_folder = "src/"
         if template == "flask":
             lines.append('dev = { cmd = "flask run --port 8000 --debug" }\n')
+            cov_folder = "app/"
         lines.extend(
             [
-                'coverage = { cmd = "pytest --cov=src tests/" }\n',
-                'coverage-html = { cmd = "pytest --cov=src --cov-report=html tests/" }\n',
+                f'test = {{ cmd = "pytest --cov={cov_folder} tests/" }}\n',
+                f'test-ui = {{ cmd = "pytest --cov={cov_folder} --cov-report=html tests/" }}\n',
                 "\n",
             ]
         )
