@@ -5,4 +5,4 @@ set -e
 cd "$(dirname "$0")/.."
 
 echo "==> Running tests"
-rye run coverage
+rye run test
