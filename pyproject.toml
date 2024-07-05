@@ -28,7 +28,7 @@ dev-dependencies = [
 ]
 
 [tool.rye.scripts]
-check = { chain = [
+fix = { chain = [
    "ruff check --fix --quiet",
    "format:ruff",
 ]}
