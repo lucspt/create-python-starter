@@ -175,11 +175,13 @@ def create_git_repo(project_directory: Path) -> None:
         exec_command(["git", "add", "-A"], cwd=project_directory)
         exec_command(["git", "commit", "-am", "Initial commit"], cwd=project_directory)
         exec_command(
-            ["git", "config", "--local", "core.hooksPath", ".githooks"],
+            ["git", "config", "--local", "core.hooksPath", ".github/hooks"],
             cwd=project_directory,
         )
         exec_command(
-            ["chmod", "+x", ".githooks/pre-commit"], cwd=project_directory, check=False
+            ["chmod", "+x", ".github/hooks/pre-commit"],
+            cwd=project_directory,
+            check=False,
         )
     except Exception as e:
         raise Exception(
