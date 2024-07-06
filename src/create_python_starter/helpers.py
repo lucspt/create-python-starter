@@ -142,13 +142,12 @@ def create_pyproject_toml_file(
 
 
 def exec_command(
-    cmd_args: list[str],
+    cmd_args: list[str] | str,
     cwd: Optional[Path | str] = None,
     check: bool = True,
     **kwargs: Any,
 ) -> None:
-    run(cmd_args, cwd=cwd, check=check, stderr=STDOUT, stdout=DEVNULL, **kwargs)
-
+    run(cmd_args, cwd=cwd, check=check, stderr=STDOUT, stdout=DEVNULL, **kwargs) 
 
 def install_dependencies(project_directory: Path) -> None:
     """Install dependencies with rye"""
@@ -169,20 +168,12 @@ def install_dependencies(project_directory: Path) -> None:
 
 
 def create_git_repo(project_directory: Path) -> None:
-    """Create a git repo and configure hooks"""
+    """Create a git repo and setup git config"""
     try:
         exec_command(["git", "init", "."], cwd=project_directory)
         exec_command(["git", "add", "-A"], cwd=project_directory)
         exec_command(["git", "commit", "-am", "Initial commit"], cwd=project_directory)
-        exec_command(
-            ["git", "config", "--local", "core.hooksPath", ".github/hooks"],
-            cwd=project_directory,
-        )
-        exec_command(
-            ["chmod", "+x", ".github/hooks/pre-commit"],
-            cwd=project_directory,
-            check=False,
-        )
+        exec_command("source ./scripts/prepare", shell=True, cwd=project_directory)
     except Exception as e:
         raise Exception(
             f"""
