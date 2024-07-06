@@ -1,8 +1,7 @@
 from pathlib import Path
 import click
-from shutil import copytree
-from .types import TemplateType, TemplateTypeWithCommon
-from typing import Optional, Any, Callable
+from .types import TemplateType
+from typing import Optional, Any
 from subprocess import run, STDOUT, DEVNULL
 
 
@@ -13,44 +12,28 @@ def is_valid_folder(root: Path) -> bool:
         root (Path): A `pathlib.Path` Posix Path pointing to the folder location
 
     """
-    conflicts = list(root.iterdir())
-    if conflicts:
-        click.echo("The directory contains files that could conflict")
-        click.echo()
-        for c in conflicts:
-            if Path(c).is_dir():
-                click.echo(f"   {c}/")
-            else:
-                click.echo(f"   {c}")
-        click.echo()
+    if not root.is_relative_to(Path.cwd()):
         click.echo(
-            "Either try using a new directory name, or remove the files listed above."
+            "Location inferred from the project's `name` argument is not relative to the current working directory. "
+            "The location must be relative."
         )
         return False
+    if root.exists():
+        conflicts = list(root.iterdir())
+        if conflicts:
+            click.echo("The directory contains files that could conflict")
+            click.echo()
+            for c in conflicts:
+                if Path(c).is_dir():
+                    click.echo(f"   {c}/")
+                else:
+                    click.echo(f"   {c}")
+            click.echo()
+            click.echo(
+                "Either try using a new directory name, or remove the files listed above."
+            )
+            return False
     return True
-
-
-def copy(
-    template: TemplateTypeWithCommon,
-    dest: str,
-    *,
-    dirs_exist_ok: bool = True,
-    ignore_patterns: Optional[Callable[[Any, list[str]], set[str]]] = None,
-) -> None:
-    """Creates (copies) all template files at the given `dest`.
-
-    Args:
-        template ("flask" | "python" | "common"): The template to copy.
-        dest (Path): The posix path pointing to the destination of the copy operation.
-    """
-    template_dir = Path(__file__).resolve().parent / "templates" / template
-    relative_dest_dir = Path(dest).resolve()
-    copytree(
-        template_dir,
-        relative_dest_dir,
-        dirs_exist_ok=dirs_exist_ok,
-        ignore=ignore_patterns,
-    )
 
 
 def create_pyproject_toml_file(
@@ -156,28 +139,6 @@ def create_pyproject_toml_file(
         else:
             lines.append(f'packages = ["src/{package_dir_name}"]\n')
         f.writelines(lines)
-
-
-def create_destination_directory(
-    template: TemplateType, project_path: Path, package_name: Optional[str] = None
-) -> Path:
-    """Creates and returns the new project's directory, w.r.t the requested template.
-
-    Args:
-        template (TemplateType): The template this directory will be created with.
-
-    Returns: The project directory's Posix Path.
-    """
-    if template == "flask":
-        return project_path
-    else:
-        if package_name is None:
-            raise ValueError(
-                "Must specify `package_name` when app template is not `flask`"
-            )
-        package_dir = Path(project_path, "src", package_name)
-        package_dir.mkdir(exist_ok=True, parents=True)
-        return package_dir
 
 
 def exec_command(

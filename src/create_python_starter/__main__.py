@@ -26,13 +26,13 @@ def create_app(name: str, template: TemplateType) -> None:
     project_path = Path(name).resolve()
 
     try:
-        if project_path.exists() and not is_valid_folder(project_path):
+        if not is_valid_folder(project_path):
             sys.exit(1)
 
         click.echo("Creating project directory...")
         templates_dir = Path(__file__).resolve().parent / "templates"
 
-        copytree(templates_dir / "common", str(project_path))
+        copytree(templates_dir / "common", str(project_path), dirs_exist_ok=True)
 
         template_dir = templates_dir / template
         copytree(template_dir, project_path, dirs_exist_ok=True)
@@ -40,8 +40,9 @@ def create_app(name: str, template: TemplateType) -> None:
         package_name = None
         if template == "python":
             package_name = name.replace("-", "_").replace(" ", "_")
-            src = Path(project_path / "src")
-            Path(src / "[package]").replace(src / package_name)
+            Path(project_path / "src" / "[package]").replace(
+                project_path / "src" / package_name
+            )
 
         create_pyproject_toml_file(
             project_path,
