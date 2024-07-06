@@ -33,10 +33,10 @@ We use [Rye](https://rye.astral.sh/guide/) to manage dependencies, if you do not
   https://rye.astral.sh/guide/installation/
 )!
 
-After you install it, you just have to run:
+After you install it, in the project's root folder, you just have to run:
 
 ```bash
-rye sync --all-features
+rye sync --all-features && source ./scripts/prepare
 ```
 
 You can then run scripts using rye run python script.py. 
