@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+# echo "==> Running tests"
+# rye run test
+
+echo "==> Running linter"
+rye run lint
+
+echo "==> Running formatters"
+rye run "format:ruff"

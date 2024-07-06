@@ -153,26 +153,7 @@ def exec_command(
 def install_dependencies(project_directory: Path) -> None:
     """Install dependencies with rye"""
     try:
-        exec_command(["rye", "sync"], cwd=project_directory, check=False)
-
-        try:
-            exec_command(
-                ["rye", "run", "pre-commit", "install"],
-                cwd=project_directory,
-                check=False,
-            )
-        except Exception as e:
-            raise Exception(
-                f"""
-                
-                Failed to install pre-commit hook scripts 
-                
-                Error: {e}
-                
-                See more at: https://pre-commit.com/
-                
-                """
-            )
+        exec_command(["rye", "sync"], cwd=project_directory)
     except Exception as e:
         raise Exception(
             f"""
@@ -188,11 +169,18 @@ def install_dependencies(project_directory: Path) -> None:
 
 
 def create_git_repo(project_directory: Path) -> None:
-    """Install"""
+    """Create a git repo and configure hooks"""
     try:
         exec_command(["git", "init", "."], cwd=project_directory)
         exec_command(["git", "add", "-A"], cwd=project_directory)
         exec_command(["git", "commit", "-am", "Initial commit"], cwd=project_directory)
+        exec_command(
+            ["git", "config", "--local", "core.hooksPath", ".githooks"],
+            cwd=project_directory,
+        )
+        exec_command(
+            ["chmod", "+x", ".githooks/pre-commit"], cwd=project_directory, check=False
+        )
     except Exception as e:
         raise Exception(
             f"""
