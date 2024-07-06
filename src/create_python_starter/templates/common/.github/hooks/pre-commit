@@ -8,7 +8,13 @@ echo "==> Running tests"
 rye run test
 
 echo "==> Running linter"
-rye run lint
+ruff check --fix
 
-echo "==> Running formatters"
-rye run "format:ruff"
+echo "==> Running formatter"
+ruff format
+
+files=$(git diff --name-only -z --diff-filter=ACMR)
+
+if ! [ -z "$files" ]; then
+  git add -- $files
+fi
