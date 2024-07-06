@@ -24,6 +24,7 @@ FLASK_TEMPALTE = "flask"
 def create_app(name: str, template: TemplateType) -> None:
     """Creates a project app with the `name` and `template` arguments given in the cli command"""
     project_path = Path(name).resolve()
+    app_name = project_path.name
 
     try:
         if not is_valid_folder(project_path):
@@ -39,14 +40,13 @@ def create_app(name: str, template: TemplateType) -> None:
 
         package_name = None
         if template == "python":
-            package_name = name.replace("-", "_").replace(" ", "_")
-            Path(project_path / "src" / "[package]").replace(
-                project_path / "src" / package_name
-            )
+            package_name = app_name.replace("-", "_").replace(" ", "_")
+            package_dir = Path(project_path / "src" / "[package]")
+            package_dir.replace(project_path / "src" / app_name)
 
         create_pyproject_toml_file(
             project_path,
-            app_name=project_path.name,
+            app_name=app_name,
             template=template,
             package_dir_name=package_name,
         )

@@ -12,12 +12,6 @@ def is_valid_folder(root: Path) -> bool:
         root (Path): A `pathlib.Path` Posix Path pointing to the folder location
 
     """
-    if not root.is_relative_to(Path.cwd()):
-        click.echo(
-            "Location inferred from the project's `name` argument is not relative to the current working directory. "
-            "The location must be relative."
-        )
-        return False
     if root.exists():
         conflicts = list(root.iterdir())
         if conflicts:
