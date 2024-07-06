@@ -2,10 +2,10 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/../../"
 
-# echo "==> Running tests"
-# rye run test
+echo "==> Running tests"
+rye run test
 
 echo "==> Running linter"
 rye run lint
