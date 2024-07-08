@@ -30,6 +30,8 @@ def create_app(name: str, template: TemplateType) -> None:
         if not is_valid_folder(project_path):
             sys.exit(1)
 
+        click.echo()
+        
         click.echo("Creating project directory...")
         templates_dir = Path(__file__).resolve().parent / "templates"
 
@@ -56,7 +58,10 @@ def create_app(name: str, template: TemplateType) -> None:
 
         click.echo("Installing depedencies...")
         install_dependencies(project_directory=project_path)
-
+        
+        click.echo()
+        click.echo(f"Successfully created project at {project_path}!")
+        click.echo()
     except Exception as e:
         click.echo(str(e))
         rmtree(project_path)
