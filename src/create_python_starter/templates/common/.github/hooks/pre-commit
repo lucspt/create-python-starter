@@ -8,10 +8,10 @@ echo "==> Running tests"
 rye run test
 
 echo "==> Running linter"
-ruff check --fix
+rye run ruff check --fix
 
 echo "==> Running formatter"
-ruff format
+rye run ruff format
 
 files=$(git diff --name-only -z --diff-filter=ACMR)
 
