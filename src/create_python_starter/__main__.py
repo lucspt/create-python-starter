@@ -44,7 +44,7 @@ def create_app(name: str, template: TemplateType) -> None:
         if template == "python":
             package_name = app_name.replace("-", "_").replace(" ", "_")
             package_dir = Path(project_path / "src" / "[package]")
-            package_dir.replace(project_path / "src" / app_name)
+            package_dir.replace(project_path / "src" / package_name)
 
         create_pyproject_toml_file(
             project_path,
