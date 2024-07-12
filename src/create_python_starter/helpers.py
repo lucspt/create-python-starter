@@ -47,7 +47,11 @@ def create_pyproject_toml_file(
         dependencies = [
             "dependencies = [\n",
             '   "flask>=3.0.3",\n',
-            '   "flask-talisman>=1.1.0",\n' "]\n",
+            '   "flask-talisman>=1.1.0",\n',
+            '   "flask-cors>=4.0.1",\n',
+            '   "pydantic>=2.8.2",\n',
+            '   "python-dotenv>=1.0.1",\n',
+            "]\n",
         ]
     else:
         dependencies = ["dependencies = []\n"]
@@ -85,7 +89,13 @@ def create_pyproject_toml_file(
         lines = ["[tool.rye.scripts]\n"]
         cov_folder = "src/"
         if template == "flask":
-            lines.append('dev = { cmd = "flask run --port 8000 --debug" }\n')
+            lines.extend(
+                [
+                    """prod = { cmd = "flask run", env = { FLASK_ENV = "production" }}\n""",
+                    """dev = { cmd = "flask run --debug", env = { FLASK_ENV = "development" } }\n""",
+                ]
+            )
+
             cov_folder = "app/"
         lines.extend(
             [
