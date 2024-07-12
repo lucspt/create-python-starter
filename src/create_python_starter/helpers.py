@@ -44,7 +44,11 @@ def create_pyproject_toml_file(
     file_location = root / "pyproject.toml"
     file_location.touch(exist_ok=True)
     if template == "flask":
-        dependencies = ["dependencies = [\n", '   "flask>=3.0.3",\n', "]\n"]
+        dependencies = [
+            "dependencies = [\n",
+            '   "flask>=3.0.3",\n',
+            '   "flask-talisman>=1.1.0",\n' "]\n",
+        ]
     else:
         dependencies = ["dependencies = []\n"]
     with open(file_location, "w") as f:
@@ -108,14 +112,13 @@ def create_pyproject_toml_file(
                 "\n",
             ]
         )
-        
+
         # ruff options
         f.writelines(["[tool.ruff.format]\n", "docstring-code-format = true\n", "\n"])
 
         # pytest options
         f.writelines(["[tool.pytest.ini_options]\n", 'testpaths = ["tests"]\n', "\n"])
 
-        
         # coverage options
         f.writelines(["[tool.coverage.report]\n", "fail_under = 90\n", "\n"])
 
@@ -145,7 +148,8 @@ def exec_command(
     check: bool = True,
     **kwargs: Any,
 ) -> None:
-    run(cmd_args, cwd=cwd, check=check, stderr=STDOUT, stdout=DEVNULL, **kwargs) 
+    run(cmd_args, cwd=cwd, check=check, stderr=STDOUT, stdout=DEVNULL, **kwargs)
+
 
 def install_dependencies(project_directory: Path) -> None:
     """Install dependencies with rye"""
