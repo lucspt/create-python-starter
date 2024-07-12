@@ -40,16 +40,16 @@ def create_app(name: str, template: TemplateType) -> None:
         template_dir = templates_dir / template
         copytree(template_dir, project_path, dirs_exist_ok=True)
 
-        package_name = None
+        package_name = app_name.replace("-", "_").replace(" ", "_")
+        
         if template == "python":
-            package_name = app_name.replace("-", "_").replace(" ", "_")
             package_dir = Path(project_path / "src" / "[package]")
             package_dir = package_dir.replace(project_path / "src" / package_name)
             Path(package_dir / "py.typed").touch()
 
         create_pyproject_toml_file(
             project_path,
-            app_name=app_name,
+            app_name=package_name,
             template=template,
             package_dir_name=package_name,
         )
