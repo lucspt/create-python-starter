@@ -1,7 +1,7 @@
 # !/usr/bin/env sh
 
 
-d="$(dirname "$0")../.github/hooks"
+d="$(dirname "$dir")/.github/hooks"
 
 git config --local core.hooksPath "$d"
 
