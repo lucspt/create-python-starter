@@ -27,7 +27,7 @@ Find the `index.html` file inside the directory and open it with a
 ## What to test
 
 Generally, anything we create should be tested. We strive to keep above 95% coverage 
-and it is mandatory to keep above 85%.
+and it is mandatory to keep at least 90%.
 
 ## Testing structure
 
