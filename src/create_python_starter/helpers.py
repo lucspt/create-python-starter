@@ -126,6 +126,18 @@ def create_pyproject_toml_file(
         # ruff options
         f.writelines(["[tool.ruff.format]\n", "docstring-code-format = true\n", "\n"])
 
+        # ruff import sorting
+        f.writelines(
+            [
+                "[tool.ruff.lint.isort]\n",
+                "length-sort = true\n",
+                "length-sort-straight = true\n",
+                "combine-as-imports = true\n",
+                f"""known-first-party = ["{app_name}", "tests]\n""",
+                "\n",
+            ]
+        )
+
         # pytest options
         f.writelines(["[tool.pytest.ini_options]\n", 'testpaths = ["tests"]\n', "\n"])
 
