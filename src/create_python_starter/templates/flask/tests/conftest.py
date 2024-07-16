@@ -23,14 +23,14 @@ def app() -> Generator[Flask, None, None]:
 
 
 @fixture()
-def api(app: Flask) -> FlaskClient:
+def client(app: Flask) -> FlaskClient:
     """Get the Flask test client.
 
     This object can be used to make mock requests to the application.
 
     Usage:
     ```
-        res = api.get("/")
+        res = client.get("/")
         assert isinstance(res, Response)
         assert res.status_code == 200
         # more tests here...
