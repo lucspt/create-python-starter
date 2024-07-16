@@ -2,7 +2,7 @@
 
 We use [pytest](https://docs.pytest.org/en/8.2.x/).
 
-Flask also provides utilites for testing, you can read up on [the guide](https://flask.palletsprojects.com/en/2.3.x/testing/) for more.
+FastAPI also provides utilites for testing, you can read up on [the guide](https://fastapi.tiangolo.com/tutorial/testing/) for more.
 
 [Test commands](#test-commands)
 [What to test](#what-to-test)
@@ -26,7 +26,7 @@ Find the `index.html` file inside the directory and open it with a
 
 ## What to test
 
-Generally, anything we create should be tested. We strive to keep above 95% coverage
+Generally, anything **we** create should be tested. We strive to keep above 95% coverage
 and it is mandatory to keep at least 90%.
 
 ## Testing app routes
@@ -36,7 +36,7 @@ something like:
 
 ```python
 @pytest.fixture()
-def client(app: Flask) -> FlaskClient:
+def client(app: Flask) -> TestClient:
     return app.test_client()
 ```
 
@@ -47,11 +47,12 @@ request this fixture and mock a route with one of it's
 Here's an example of that:
 
 ```python
-from flask.testing import FlaskClient
+from fatapi.testclient import TestClient
 
-def test_root_get(api: FlaskClient) -> None:
-    res = api.get("/") # you can access the json data with `res.get_json()`
+def test_root_get(client: TestClient) -> None:
+    res = client.get("/")
     assert res.status_code == 200
+    # ...
 ```
 
 ## Testing structure

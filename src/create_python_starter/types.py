@@ -1,3 +1,3 @@
 from typing import Literal
 
-TemplateType = Literal["flask", "python"]
+TemplateType = Literal["flask", "python", "fastapi"]

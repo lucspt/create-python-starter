@@ -53,6 +53,13 @@ def create_pyproject_toml_file(
             '   "python-dotenv>=1.0.1",\n',
             "]\n",
         ]
+    elif template == "fastapi":
+        dependencies = [
+            "dependencies = [\n",
+            '   "fastapi>=0.111.1",\n',
+            '   "python-dotenv>=1.0.1",\n',
+            "]\n",
+        ]
     else:
         dependencies = ["dependencies = []\n"]
     with open(file_location, "w") as f:
@@ -71,17 +78,29 @@ def create_pyproject_toml_file(
             ]
         )
 
+        dev_dependencies = [
+            "dev-dependencies = [\n",
+            '   "mypy>=1.10.1",\n',
+            '   "pytest-cov>=5.0.0",\n',
+            '   "ruff>=0.5.0",\n',
+        ]
+
+        if template == "fastapi":
+            dev_dependencies.append('   "httpx>=0.27.0",\n')
+
+        dev_dependencies.extend(
+            [
+                "]\n",
+                "\n",
+            ]
+        )
+
         # rye
         f.writelines(
             [
                 "[tool.rye]\n",
                 "managed = true\n",
-                # keep like this for indentation reasons
-                "dev-dependencies = [\n",
-                '   "mypy>=1.10.1",\n',
-                '   "pytest-cov>=5.0.0",\n',
-                '   "ruff>=0.5.0",\n' "]\n",
-                "\n",
+                *dev_dependencies,
             ]
         )
 
@@ -93,6 +112,13 @@ def create_pyproject_toml_file(
                 [
                     """prod = { cmd = "flask run", env = { FLASK_ENV = "production" }}\n""",
                     """dev = { cmd = "flask run --debug", env = { FLASK_ENV = "development" } }\n""",
+                ]
+            )
+        elif template == "fastapi":
+            lines.extend(
+                [
+                    """prod = { cmd = "fastapi run", env = { FAST_API_ENV = "production" }}\n""",
+                    """dev = { cmd = "fastapi dev app/main.py", env = { FAST_API_ENV = "development" } }\n""",
                 ]
             )
 
@@ -125,6 +151,18 @@ def create_pyproject_toml_file(
 
         # ruff options
         f.writelines(["[tool.ruff.format]\n", "docstring-code-format = true\n", "\n"])
+
+        # ruff import sorting
+        f.writelines(
+            [
+                "[tool.ruff.lint.isort]\n",
+                "length-sort = true\n",
+                "length-sort-straight = true\n",
+                "combine-as-imports = true\n",
+                f"""known-first-party = ["{app_name}", "tests"]\n""",
+                "\n",
+            ]
+        )
 
         # pytest options
         f.writelines(["[tool.pytest.ini_options]\n", 'testpaths = ["tests"]\n', "\n"])

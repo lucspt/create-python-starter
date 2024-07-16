@@ -12,13 +12,14 @@ from .types import TemplateType
 
 PYTHON_TEMPLATE = "python"
 FLASK_TEMPALTE = "flask"
+FAST_API_TEMPALTE = "fastapi"
 
 
 @click.command()
 @click.option("--name", prompt="What would you like to name your app?")
 @click.option(
     "--template",
-    type=click.Choice([PYTHON_TEMPLATE, FLASK_TEMPALTE]),
+    type=click.Choice([PYTHON_TEMPLATE, FLASK_TEMPALTE, FAST_API_TEMPALTE]),
     prompt="What template would you like to create?",
 )
 def create_app(name: str, template: TemplateType) -> None:
