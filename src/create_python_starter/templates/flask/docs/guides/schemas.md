@@ -1,7 +1,7 @@
 # Schemas
 
 Here is the folder where we define our schemas! Whenever you need to define
-a json schema for a route (or any other purpose) define them here. You should 
+a json schema for a route (or any other purpose) define them here. You should
 always define schemas for routes that receive any type of payload in the form
 of query strings, json, or form data, so that they can be validated.
 
@@ -27,5 +27,8 @@ from http_utils import validate_request
 def login(body: User): # the decorator will pass the result if `body` is requested
   # login user...
 ```
+
+If you are wondering what the `validate_request` decorator is, it is a library of ours
+that we use to validate flask requests.
 
 Read up on the their [docs](https://docs.pydantic.dev/latest/) for more!

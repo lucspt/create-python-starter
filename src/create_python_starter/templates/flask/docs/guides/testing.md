@@ -12,7 +12,6 @@ Flask also provides utilites for testing, you can read up on [the guide](https:/
 ## Test commands
 
 ```bash
-
 # run test with coverage report in terminal
 rye run test
 
@@ -31,7 +30,7 @@ and it is mandatory to keep at least 90%.
 
 ## Testing app routes
 
-If you look at our [configuration file](./conftest.py) there are two fixtures defined that look
+If you look at our configuration file, `conftest.py`, there are two fixtures defined that look
 something like:
 
 ```python
@@ -49,8 +48,8 @@ Here's an example of that:
 ```python
 from flask.testing import FlaskClient
 
-def test_root_get(api: FlaskClient) -> None:
-    res = api.get("/") # you can access the json data with `res.get_json()`
+def test_root_get(client: FlaskClient) -> None:
+    res = client.get("/") # you can access the json data with `res.get_json()`
     assert res.status_code == 200
 ```
 
