@@ -4,15 +4,14 @@ We use [pytest](https://docs.pytest.org/en/8.2.x/).
 
 FastAPI also provides utilites for testing, you can read up on [the guide](https://fastapi.tiangolo.com/tutorial/testing/) for more.
 
-[Test commands](#test-commands)
-[What to test](#what-to-test)
-[Testing routes](#testing-app-routes)
-[Testing structure](#testing-structure)
+- [Test commands](#test-commands)
+- [What to test](#what-to-test)
+- [Testing routes](#testing-app-routes)
+- [Testing structure](#testing-structure)
 
 ## Test commands
 
 ```bash
-
 # run test with coverage report in terminal
 rye run test
 
@@ -31,13 +30,14 @@ and it is mandatory to keep at least 90%.
 
 ## Testing app routes
 
-If you look at our [configuration file](./conftest.py) there are two fixtures defined that look
+If you look at our configuration file `conftest.py`, there are two `fixture`s defined that look
 something like:
 
 ```python
 @pytest.fixture()
-def client(app: Flask) -> TestClient:
-    return app.test_client()
+def client(app: FastApi) -> TestClient:
+  """...docs"""
+    return TestClient(app)
 ```
 
 Whenever you need to access the flask application and test a route,
@@ -47,7 +47,7 @@ request this fixture and mock a route with one of it's
 Here's an example of that:
 
 ```python
-from fatapi.testclient import TestClient
+from fastapi.testclient import TestClient
 
 def test_root_get(client: TestClient) -> None:
     res = client.get("/")
