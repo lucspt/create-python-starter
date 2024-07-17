@@ -1,6 +1,6 @@
 # Welcome!
 
-Hey, this is our fastify app documentation, make yourself at home!
+Hey, this is our flask app documentation, make yourself at home!
 
 If this is your first time here, we recommended to first start with
 reading the `CONTRIBUTING.md` file located in the project repo,

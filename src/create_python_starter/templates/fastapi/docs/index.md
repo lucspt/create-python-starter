@@ -1,6 +1,6 @@
 # Welcome!
 
-Hey, this is our fastify app documentation, make yourself at home!
+Hey, this is our fastapi app documentation, make yourself at home!
 
 If this is your first time here, we recommended starting with our 
 guides:
