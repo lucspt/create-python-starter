@@ -209,9 +209,9 @@ def configure_mkdocs_yaml(root: Path, site_name: str, template: TemplateType) ->
                 [
                     "\n",
                     "nav:\n",
-                    "   - Routes Guide: guides/routes.md\n",
-                    "   - Schemas Guide: guides/schemas.md\n",
-                    "   - Testing Guide: guides/testing.md\n",
+                    "  - Routes Guide: guides/routes.md\n",
+                    "  - Schemas Guide: guides/schemas.md\n",
+                    "  - Testing Guide: guides/testing.md\n",
                     "\n",
                 ]
             )
