@@ -5,6 +5,7 @@ from .helpers import (
     create_git_repo,
     install_dependencies,
     create_pyproject_toml_file,
+    configure_mkdocs_yaml,
 )
 import sys
 from shutil import rmtree, copytree
@@ -32,7 +33,7 @@ def create_app(name: str, template: TemplateType) -> None:
             sys.exit(1)
 
         click.echo()
-        
+
         click.echo("Creating project directory...")
         templates_dir = Path(__file__).resolve().parent / "templates"
 
@@ -42,7 +43,7 @@ def create_app(name: str, template: TemplateType) -> None:
         copytree(template_dir, project_path, dirs_exist_ok=True)
 
         package_name = app_name.replace("-", "_").replace(" ", "_")
-        
+
         if template == "python":
             package_dir = Path(project_path / "src" / "[package]")
             package_dir = package_dir.replace(project_path / "src" / package_name)
@@ -55,12 +56,14 @@ def create_app(name: str, template: TemplateType) -> None:
             package_dir_name=package_name,
         )
 
+        configure_mkdocs_yaml(project_path, site_name=package_name.replace("_", " ").title())
+
         click.echo("Initializing git repository...")
         create_git_repo(project_directory=project_path)
 
         click.echo("Installing depedencies...")
         install_dependencies(project_directory=project_path)
-        
+
         click.echo()
         click.echo(f"Successfully created project at {project_path}!")
         click.echo()
