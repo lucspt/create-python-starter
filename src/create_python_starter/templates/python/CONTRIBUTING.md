@@ -52,6 +52,9 @@ rye run check
 rye run test 
 # OR for html report
 rye run test-ui
+
+# serve documentation (mkdocs)
+rye run docs:serve
 ```
 
 ## Coding guidelines
