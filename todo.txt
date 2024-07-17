@@ -1,0 +1,3 @@
+[x] create initial 'hello world' functions
+[x] create example tests and 100% coverage
+[x] figure out flask opinionated directory structure
