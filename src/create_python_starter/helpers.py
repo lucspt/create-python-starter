@@ -195,10 +195,7 @@ def create_pyproject_toml_file(
         f.writelines(lines)
 
 
-def configure_mkdocs_yaml(
-    root: Path,
-    site_name: str,
-) -> None:
+def configure_mkdocs_yaml(root: Path, site_name: str, template: TemplateType) -> None:
     loc = root / "mkdocs.yml"
 
     loc.touch(exist_ok=True)
@@ -207,6 +204,17 @@ def configure_mkdocs_yaml(
         lines = f.readlines()
         f.seek(0)
         lines[0] = f"site_name: {site_name} Documentation"
+        if template in {"flask", "fastapi"}:
+            lines.extend(
+                [
+                    "\n",
+                    "nav:\n",
+                    "   - Routes Guide: guides/routes.md\n",
+                    "   - Schemas Guide: guides/schemas.md\n",
+                    "   - Testing Guide: guides/testing.md\n",
+                    "\n",
+                ]
+            )
         f.writelines(lines)
 
 

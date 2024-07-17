@@ -30,7 +30,7 @@ and it is mandatory to keep at least 90%.
 
 ## Testing app routes
 
-If you look at our configuration file `conftest.py`, there are two `fixture`s defined that look
+If you look at our configuration file, `conftest.py`, there are two `fixture`s defined that look
 something like:
 
 ```python

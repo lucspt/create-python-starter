@@ -56,7 +56,11 @@ def create_app(name: str, template: TemplateType) -> None:
             package_dir_name=package_name,
         )
 
-        configure_mkdocs_yaml(project_path, site_name=package_name.replace("_", " ").title())
+        configure_mkdocs_yaml(
+            project_path,
+            site_name=package_name.replace("_", " ").title(),
+            template=template,
+        )
 
         click.echo("Initializing git repository...")
         create_git_repo(project_directory=project_path)

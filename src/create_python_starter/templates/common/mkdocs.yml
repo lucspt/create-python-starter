@@ -1,4 +1,4 @@
-site_name: {{name}}
+site_name: { { name } }
 
 theme:
   name: material
