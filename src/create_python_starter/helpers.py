@@ -46,7 +46,7 @@ def create_pyproject_toml_file(
     if template == "flask":
         dependencies = [
             "dependencies = [\n",
-            '   "flask>=3.0.3",\n',
+            '   "flask==3.0.3",\n',
             '   "flask-talisman>=1.1.0",\n',
             '   "flask-cors>=4.0.1",\n',
             '   "pydantic>=2.8.2",\n',
@@ -56,7 +56,7 @@ def create_pyproject_toml_file(
     elif template == "fastapi":
         dependencies = [
             "dependencies = [\n",
-            '   "fastapi>=0.111.1",\n',
+            '   "fastapi==0.111.1",\n',
             '   "python-dotenv>=1.0.1",\n',
             "]\n",
         ]
@@ -83,6 +83,9 @@ def create_pyproject_toml_file(
             '   "mypy>=1.10.1",\n',
             '   "pytest-cov>=5.0.0",\n',
             '   "ruff>=0.5.0",\n',
+            '   "mkdocs>=1.6.0",\n',
+            '   "mkdocstrings[python]>=0.25.1",\n',
+            '   "mkdocs-material>=9.5.29",\n',
         ]
 
         if template == "fastapi":
@@ -134,6 +137,8 @@ def create_pyproject_toml_file(
                 '"format:ruff" = "ruff format"\n',
                 "\n",
                 '"lint" = "ruff check --fix"\n',
+                "\n",
+                '"docs:serve" = { cmd = "mkdocs serve -f mkdocs.yml" }\n',
                 "\n",
             ]
         )
@@ -190,13 +195,28 @@ def create_pyproject_toml_file(
         f.writelines(lines)
 
 
+def configure_mkdocs_yaml(
+    root: Path,
+    site_name: str,
+) -> None:
+    loc = root / "mkdocs.yml"
+
+    loc.touch(exist_ok=True)
+
+    with open(loc, "r+") as f:
+        lines = f.readlines()
+        f.seek(0)
+        lines[0] = f"site_name: {site_name} Documentation"
+        f.writelines(lines)
+
+
 def exec_command(
     cmd_args: list[str] | str,
     cwd: Optional[Path | str] = None,
     check: bool = True,
     **kwargs: Any,
 ) -> None:
-    run(cmd_args, cwd=cwd, check=check, stderr=STDOUT, stdout=DEVNULL, **kwargs)
+    run(cmd_args, cwd=cwd, stderr=STDOUT, stdout=DEVNULL, check=check, **kwargs)
 
 
 def install_dependencies(project_directory: Path) -> None:
