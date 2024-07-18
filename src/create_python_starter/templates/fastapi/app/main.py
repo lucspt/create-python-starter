@@ -1,10 +1,16 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi_unk import Unk
 
 
 def create_app() -> FastAPI:
-    """Create the fastify application"""
+    """Create the `FastAPI` application"""
 
-    app = FastAPI()
+    app = FastAPI(on_startup=[Unk.on_startup])
+
+    app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=["*"])
+
+    Unk(app)
 
     from .routes.root import router as root_router
 
