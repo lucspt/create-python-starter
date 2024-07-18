@@ -49,6 +49,7 @@ def create_pyproject_toml_file(
             '   "flask==3.0.3",\n',
             '   "flask-talisman>=1.1.0",\n',
             '   "flask-cors>=4.0.1",\n',
+            '   "types-flask-cors>=4.0.0.20240523"\n,',
             '   "pydantic>=2.8.2",\n',
             '   "python-dotenv>=1.0.1",\n',
             "]\n",
@@ -57,7 +58,7 @@ def create_pyproject_toml_file(
         dependencies = [
             "dependencies = [\n",
             '   "fastapi==0.111.1",\n',
-            '   "python-dotenv>=1.0.1",\n',
+            '   "pydantic-settings>=2.3.4",\n',
             "]\n",
         ]
     else:
