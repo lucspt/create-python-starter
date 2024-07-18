@@ -6,7 +6,7 @@ from fastapi_unk import Unk
 def create_app() -> FastAPI:
     """Create the `FastAPI` application"""
 
-    app = FastAPI(on_startup=[Unk.on_startup])
+    app = FastAPI()
 
     app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=["*"])
 
