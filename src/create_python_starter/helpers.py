@@ -194,17 +194,6 @@ def configure_mkdocs_yaml(root: Path, site_name: str, template: TemplateType) ->
         lines = f.readlines()
         f.seek(0)
         lines[0] = f"site_name: {site_name} Documentation"
-        if template in {"flask", "fastapi"}:
-            lines.extend(
-                [
-                    "\n",
-                    "nav:\n",
-                    "  - Routes Guide: guides/routes.md\n",
-                    "  - Schemas Guide: guides/schemas.md\n",
-                    "  - Testing Guide: guides/testing.md\n",
-                    "\n",
-                ]
-            )
         f.writelines(lines)
 
 
@@ -220,7 +209,7 @@ def exec_command(
 def install_dependencies(project_directory: Path) -> None:
     """Install dependencies with rye"""
     try:
-        exec_command(["rye", "sync"], cwd=project_directory)
+        exec_command(["rye", "sync", "--all-features"], cwd=project_directory)
     except Exception as e:
         raise Exception(
             f"""
