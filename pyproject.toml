@@ -1,7 +1,7 @@
 [project]
-name = "create-python-starter"
+name = "create_python_starter"
 version = "0.1.0"
-description = "Add your description here"
+description = "A cli tool for scaffolding unk python projects."
 authors = [
     { name = "lucspt", email = "149544385+lucspt@users.noreply.github.com" }
 ]
@@ -12,7 +12,7 @@ readme = "README.md"
 requires-python = ">= 3.12"
 
 [project.scripts]
-create_python_starter = "create_python_starter.__main__:create_app"
+create_unk_python_starter = "create_python_starter.__main__:create_app"
 
 [build-system]
 requires = ["hatchling"]
