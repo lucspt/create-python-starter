@@ -10,7 +10,19 @@ like:
 - [mypy](https://mypy.readthedocs.io/en/stable/index.html)
 - git pre-commit hook (testing, linting, formatting, etc)
 
-You can create a new project interactively by running:
+## Installation
+
+First, you will have to [install pipx](https://pipx.pypa.io/stable/installation/).
+
+Once you have it installed you can run:
+
+```text
+pipx install <INSERT_LINK_HERE>
+```
+
+## Usage
+
+After installing, You can create a new project interactively by running:
 
 ```text
 create_python_starter
