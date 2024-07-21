@@ -1,8 +1,10 @@
 from pathlib import Path
+from subprocess import DEVNULL, STDOUT, run
+from typing import Any, Optional
+
 import click
+
 from .types import TemplateType
-from typing import Optional, Any
-from subprocess import run, STDOUT, DEVNULL
 
 
 def is_valid_folder(root: Path) -> bool:
@@ -113,17 +115,18 @@ def create_pyproject_toml_file(
             [
                 f'test = {{ cmd = "pytest --cov={cov_folder} tests/" }}\n',
                 f'test-ui = {{ cmd = "pytest --cov={cov_folder} --cov-report=html tests/" }}\n',
-                *[
-                    "fix = { chain = [\n",
-                    '   "ruff check --fix --quiet",\n',
-                    '   "format:ruff",\n',
-                    "]}\n",
-                ],
-                '"format:ruff" = { cmd = "ruff format" }\n',
                 "\n",
                 *[
+                    "fix = { chain = [\n",
+                    '   "lint:ruff",\n',
+                    '   "ruff format",\n',
+                    "]}\n",
+                ],
+                "\n",
+                '"lint:ruff" = { cmd = "ruff check --fix" }\n',
+                *[
                     "lint = { chain = [\n",
-                    '   "ruff check --fix",\n',
+                    '   "lint:ruff",\n',
                     '   "mypy ."\n',
                     "]}\n",
                 ],
@@ -144,8 +147,22 @@ def create_pyproject_toml_file(
             ]
         )
 
-        # ruff options
+        # ruff format config
         f.writelines(["[tool.ruff.format]\n", "docstring-code-format = true\n", "\n"])
+
+        # ruff lint config
+        f.writelines(
+            [
+                "[tool.ruff.lint]\n",
+                "select = [\n",
+                "   # isort\n",
+                '   "I",\n',
+                "   # remove unused imports\n",
+                '   "F401",\n',
+                "]\n",
+                "\n",
+            ]
+        )
 
         # ruff import sorting
         f.writelines(

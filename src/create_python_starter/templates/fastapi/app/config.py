@@ -1,6 +1,7 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
 import os
 from functools import cache
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Config(BaseSettings):

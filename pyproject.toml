@@ -21,7 +21,7 @@ build-backend = "hatchling.build"
 [tool.rye]
 managed = true
 dev-dependencies = [
-    "mypy>=1.10.1",
+    "mypy>=1.11.0",
     "pytest-cov>=5.0.0",
     "pre-commit>=3.7.1",
     "ruff>=0.5.0",
@@ -34,7 +34,19 @@ fix = { chain = [
 ]}
 "format:ruff" = "ruff format"
 
-lint = "ruff check --fix"
+lint = { chain = [
+    "ruff check --fix",
+    "mypy ."
+]}
+
+[tool.ruff.lint]
+select = [
+   # isort 
+   "I",
+   # remove unused imports
+   "F401"
+]
+
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402"]
