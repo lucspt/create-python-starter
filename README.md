@@ -49,6 +49,6 @@ Options:
 # Folder location inference
 
 **Note**: the location of the project will be inferred by the `name` argument. So if your choose a project name of
-`my-project`, the scaffolder will create a new directory named `my-project` in the same folder you called the command in.
-If, for example you specified a name of `.`, the tool will infer that the name of the project is the name of the current directory.
+`my-project`, the project will be created in a new directory named `my-project` in the same folder you ran the command in.
+If, for example, you specified a name of `.`, the tool will infer that the name of the project is the name of the current directory.
 You can not make a new project in a non-empty directory.
