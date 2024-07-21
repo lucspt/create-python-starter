@@ -30,8 +30,6 @@ What template would you like to create? (python, fastapi):
 
 To answer, just type and click enter.
 
-To create a new `FastAPI` service, choose `fastapi`. To create a new Python library, choose `python`.
-
 You can also use command line arguments for a non-interactive experience:
 
 ```text
@@ -46,9 +44,17 @@ Options:
   --template [python|fastapi]
 ```
 
+## Choosing a project template.
+
+When creating a project, you will be prompted for the template you want to create.
+
+The two options are `fastapi` and `python`.
+
+To create a new `FastAPI` service, choose `fastapi`. To create a new Python library, choose `python`.
+
 ## Folder location inference
 
-**Note**: the location of the project will be inferred by the `name` argument. So if you choose a project name of
+**Note**: the location of the project will be inferred through the `name` argument. So if you choose a project name of
 `my-project`, the project will be created in a new directory named `my-project` in the same folder you ran the command in.
 If, for example, you specified a name of `.`, the tool will infer that the name of the project is the name of the current directory.
 You can not make a new project in a non-empty directory.
