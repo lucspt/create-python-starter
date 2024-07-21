@@ -39,22 +39,11 @@ def create_pyproject_toml_file(
     """Creates a pyproject.toml file at in the top level of the `root` directory"""
     if template == "python" and package_dir_name is None:
         raise ValueError(
-            "Must specify `package_dir_name` argument when app template is not `flask`"
+            "Must specify `package_dir_name` argument when app template is not `fastapi`"
         )
     file_location = root / "pyproject.toml"
     file_location.touch(exist_ok=True)
-    if template == "flask":
-        dependencies = [
-            "dependencies = [\n",
-            '   "flask==3.0.3",\n',
-            '   "flask-talisman>=1.1.0",\n',
-            '   "flask-cors>=4.0.1",\n',
-            '   "types-flask-cors>=4.0.0.20240523"\n,',
-            '   "pydantic>=2.8.2",\n',
-            '   "python-dotenv>=1.0.1",\n',
-            "]\n",
-        ]
-    elif template == "fastapi":
+    if template == "fastapi":
         dependencies = [
             "dependencies = [\n",
             '   "fastapi==0.111.1",\n',
@@ -111,14 +100,7 @@ def create_pyproject_toml_file(
         # rye scripts
         lines = ["[tool.rye.scripts]\n"]
         cov_folder = "src/"
-        if template == "flask":
-            lines.extend(
-                [
-                    """prod = { cmd = "flask run", env = { FLASK_ENV = "production" }}\n""",
-                    """dev = { cmd = "flask run --debug", env = { FLASK_ENV = "development" } }\n""",
-                ]
-            )
-        elif template == "fastapi":
+        if template == "fastapi":
             lines.extend(
                 [
                     """prod = { cmd = "fastapi run", env = { FAST_API_ENV = "production" }}\n""",
@@ -196,7 +178,7 @@ def create_pyproject_toml_file(
         lines = [
             "[tool.hatch.build.targets.wheel]\n",
         ]
-        if template == "flask":
+        if template == "fastapi":
             lines.append('packages = ["app"]\n')
         else:
             lines.append(f'packages = ["src/{package_dir_name}"]\n')
