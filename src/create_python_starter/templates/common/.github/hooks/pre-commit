@@ -8,7 +8,7 @@ echo "==> Running tests"
 rye run test
 
 echo "==> Running linter"
-rye run ruff check --fix
+rye run lint
 
 echo "==> Running formatter"
 rye run ruff format
