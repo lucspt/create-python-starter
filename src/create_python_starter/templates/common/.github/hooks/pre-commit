@@ -8,7 +8,10 @@ echo "==> Running tests"
 rye run test
 
 echo "==> Running linter"
-rye run lint
+rye run ruff check --fix
+
+echo "==> Running type checker"
+rye run mypy .
 
 echo "==> Running formatter"
 rye run ruff format
