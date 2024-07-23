@@ -16,7 +16,7 @@ rye run mypy .
 echo "==> Running formatter"
 rye run ruff format
 
-files=$(git diff --name-only -z --diff-filter=ACMR)
+files=$(git diff --name-only -z --cached --diff-filter=ACMR)
 
 if ! [ -z "$files" ]; then
   git add -- "$files"
