@@ -15,12 +15,6 @@ If you have any questions or problems, you can message the slack
 channel directly. Whenever it is appropriate, we like to share
 messages with the entire team to ensure everyone is on the same page.
 
-**Do NOT be scared to ask for help!**
-If you have already tried to answer the question yourself, but
-did not find an answer, don't hesitate to ask anyone else that
-you deem fit! We are all here to support each other and **WILL NOT**
-look down upon a request for help.
-
 ## Find A Bug?
 
 If you find a bug in the code, mention it to the team.
@@ -36,7 +30,7 @@ After you install it, you just have to run:
 rye sync --all-features && source ./scripts/prepare
 ```
 
-You can then run scripts using rye run python script.py.
+You can then run scripts using `rye run python script.py`.
 
 ### Commonly used rye scripts
 
@@ -98,3 +92,5 @@ When specifying a type, choose from these options:
 The optional scope should be the names of the project directories it is affecting.
 
 If adding more than one scope, separate them by commas, e.g.`lib,tests`
+
+And that's about all you need to know to start contributing!
