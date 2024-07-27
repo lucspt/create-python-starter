@@ -78,6 +78,7 @@ def create_pyproject_toml_file(
             '   "mkdocs>=1.6.0",\n',
             '   "mkdocstrings[python]>=0.25.1",\n',
             '   "mkdocs-material>=9.5.29",\n',
+            '       "commitlint>=1.1.0",\n',
         ]
 
         if template == "fastapi":

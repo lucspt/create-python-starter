@@ -1,15 +1,19 @@
 # !/usr/bin/env sh
 
-
 d="$(dirname "$dir")/.github/hooks"
 
 git config --local core.hooksPath "$d"
 
-pre_commit_file="$d/pre-commit"
+RED='\033[0;31m'
 
-echo "$pre_commit_file"
+prepare_hook() {
+  if ! [[ -x "$1" ]] && command -v chmod &> /dev/null; then
+    chmod +x "$1"
+    echo "$1"
+  else
+    printf "${RED} Could not set github hooks files located in $d as executable. Make sure to do so before proceeding\n"
+  fi
+}
 
-if ! [[ -x "$pre_commit_file" ]] && command -v chmod &> /dev/null; then
-  chmod +x "$pre_commit_file"
-fi
-  
+prepare_hook "$d/pre-commit"
+prepare_hook "$d/commit-msg"
