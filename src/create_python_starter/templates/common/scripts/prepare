@@ -11,7 +11,7 @@ prepare_hook() {
     chmod +x "$1"
     echo "$1"
   else
-    printf "${RED} Could not set github hooks files located in $d as executable. Make sure to do so before proceeding\n"
+    printf "${RED} Could not set github hooks file located at $1 as executable. Make sure to do so before proceeding\n"
   fi
 }
 
