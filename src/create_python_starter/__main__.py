@@ -50,7 +50,7 @@ def create_app(name: str, template: TemplateType) -> None:
             package_dir = package_dir.replace(project_path / "src" / package_name)
             Path(package_dir / "py.typed").touch()
 
-        create_pyproject_toml_file(
+        devdeps, deps = create_pyproject_toml_file(
             project_path,
             app_name=package_name,
             template=template,
@@ -66,8 +66,9 @@ def create_app(name: str, template: TemplateType) -> None:
         click.echo("Initializing git repository...")
         create_git_repo(project_directory=project_path)
 
-        click.echo("Installing depedencies...")
-        install_dependencies(project_directory=project_path)
+        install_dependencies(
+            project_directory=project_path, dev_dependencies=devdeps, dependencies=deps
+        )
 
         click.echo()
         click.echo(f"Successfully created project at {project_path}!")

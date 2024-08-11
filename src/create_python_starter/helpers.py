@@ -37,7 +37,7 @@ def create_pyproject_toml_file(
     app_name: str,
     template: TemplateType,
     package_dir_name: Optional[str] = None,
-) -> None:
+) -> tuple[list[str], list[str]]:
     """Creates a pyproject.toml file at in the top level of the `root` directory"""
     if template == "python" and package_dir_name is None:
         raise ValueError(
@@ -78,7 +78,7 @@ def create_pyproject_toml_file(
             '   "mkdocs>=1.6.0",\n',
             '   "mkdocstrings[python]>=0.25.1",\n',
             '   "mkdocs-material>=9.5.29",\n',
-            '       "commitlint>=1.1.0",\n',
+            '   "commitlint>=1.1.0",\n',
         ]
 
         if template == "fastapi":
@@ -201,6 +201,7 @@ def create_pyproject_toml_file(
         else:
             lines.append(f'packages = ["src/{package_dir_name}"]\n')
         f.writelines(lines)
+    return dev_dependencies[1:-2], dependencies[1:-2]
 
 
 def configure_mkdocs_yaml(root: Path, site_name: str, template: TemplateType) -> None:
@@ -224,9 +225,15 @@ def exec_command(
     run(cmd_args, cwd=cwd, stderr=STDOUT, stdout=DEVNULL, check=check, **kwargs)
 
 
-def install_dependencies(project_directory: Path) -> None:
+def install_dependencies(
+    project_directory: Path, dev_dependencies: list[str], dependencies: list[str]
+) -> None:
     """Install dependencies with rye"""
     try:
+        click.echo("Installing depedencies...\n")
+        click.echo(f"Dev dependencies:\n{"".join(dev_dependencies)}")
+        if dependencies:
+            click.echo(f"Dependencies:\n{"".join(dependencies)}")
         exec_command(["rye", "sync", "--all-features"], cwd=project_directory)
     except Exception as e:
         raise Exception(
