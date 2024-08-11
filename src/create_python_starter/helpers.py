@@ -84,12 +84,7 @@ def create_pyproject_toml_file(
         if template == "fastapi":
             dev_dependencies.append('   "httpx>=0.27.0",\n')
 
-        dev_dependencies.extend(
-            [
-                "]\n",
-                "\n",
-            ]
-        )
+        dev_dependencies.append("]\n\n")
 
         # rye
         f.writelines(
@@ -201,7 +196,7 @@ def create_pyproject_toml_file(
         else:
             lines.append(f'packages = ["src/{package_dir_name}"]\n')
         f.writelines(lines)
-    return dev_dependencies[1:-2], dependencies[1:-2]
+    return dev_dependencies[1:-1], dependencies[1:-1]
 
 
 def configure_mkdocs_yaml(root: Path, site_name: str, template: TemplateType) -> None:
