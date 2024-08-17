@@ -226,9 +226,9 @@ def install_dependencies(
     """Install dependencies with rye"""
     try:
         click.echo("Installing depedencies...\n")
-        click.echo(f"Dev dependencies:\n{"".join(dev_dependencies)}")
+        click.echo(f"Dev dependencies:\n{''.join(dev_dependencies)}")
         if dependencies:
-            click.echo(f"Dependencies:\n{"".join(dependencies)}")
+            click.echo(f"Dependencies:\n{''.join(dependencies)}")
         exec_command(["rye", "sync", "--all-features"], cwd=project_directory)
     except Exception as e:
         raise Exception(
