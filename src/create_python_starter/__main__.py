@@ -10,6 +10,7 @@ from .helpers import (
     create_pyproject_toml_file,
     install_dependencies,
     is_valid_folder,
+    pin_python_version,
 )
 from .types import TemplateType
 
@@ -49,6 +50,8 @@ def create_app(name: str, template: TemplateType) -> None:
             package_dir = Path(project_path / "src" / "[package]")
             package_dir = package_dir.replace(project_path / "src" / package_name)
             Path(package_dir / "py.typed").touch()
+
+        pin_python_version(project_path, "3.12.3")
 
         devdeps, deps = create_pyproject_toml_file(
             project_path,

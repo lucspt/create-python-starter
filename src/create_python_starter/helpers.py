@@ -32,6 +32,12 @@ def is_valid_folder(root: Path) -> bool:
     return True
 
 
+def pin_python_version(root: Path, version: str) -> None:
+    f = root / ".python-version"
+    f.touch()
+    f.write_text(version)
+
+
 def create_pyproject_toml_file(
     root: Path,
     app_name: str,
@@ -65,7 +71,7 @@ def create_pyproject_toml_file(
                 "authors = []\n",
                 *dependencies,
                 'readme = "README.md"\n',
-                'requires-python = ">= 3.8"\n',
+                'requires-python = ">= 3.10"\n',
                 "\n",
             ]
         )
