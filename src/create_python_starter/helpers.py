@@ -65,7 +65,7 @@ def create_pyproject_toml_file(
                 "authors = []\n",
                 *dependencies,
                 'readme = "README.md"\n',
-                'requires-python = ">= 3.12"\n',
+                'requires-python = ">= 3.8"\n',
                 "\n",
             ]
         )
