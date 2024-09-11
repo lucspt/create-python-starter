@@ -256,7 +256,7 @@ def create_git_repo(project_directory: Path) -> None:
         exec_command(["git", "init", "."], cwd=project_directory)
         exec_command(["git", "add", "-A"], cwd=project_directory)
         exec_command(["git", "commit", "-am", "Initial commit"], cwd=project_directory)
-        exec_command("source ./scripts/prepare", shell=True, cwd=project_directory)
+        exec_command(["sh", "./scripts/prepare"], cwd=project_directory)
     except Exception as e:
         raise Exception(
             f"""
