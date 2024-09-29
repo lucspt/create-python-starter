@@ -12,7 +12,7 @@ readme = "README.md"
 requires-python = ">= 3.12"
 
 [project.scripts]
-create_unk_python_starter = "create_python_starter.__main__:create_app"
+create-python-starter = "create_python_starter.__main__:create_app"
 
 [build-system]
 requires = ["hatchling"]
