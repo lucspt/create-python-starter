@@ -9,16 +9,13 @@ We are excited for you to start contributing! Here are some guidelines:
 
 ## Have a Question or Problem?
 
-**TL;DR: Message slack, don't be scared to ask for help**
-
 If you have any questions or problems, you can message the slack
 channel directly. Whenever it is appropriate, we like to share
 messages with the entire team to ensure everyone is on the same page.
 
 ## Find A Bug?
 
-If you find a bug in the code, mention it to the team.
-Then, you can submit a pull request with a fix.
+If you find a bug in the code you can submit a pull request with a fix.
 
 ## Development Setup
 
