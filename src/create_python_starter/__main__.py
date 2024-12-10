@@ -19,15 +19,30 @@ FAST_API_TEMPLATE = "fastapi"
 
 
 @click.command()
-@click.option("--name", prompt="What would you like to name your app?")
+@click.argument("project", required=False)
+@click.option(
+    "--name",
+    help="The name of the project",
+)
 @click.option(
     "--template",
     type=click.Choice([PYTHON_TEMPLATE, FAST_API_TEMPLATE]),
-    prompt="What template would you like to create?",
+    help="The project's template",
 )
-def create_app(name: str, template: TemplateType) -> None:
-    """Creates a project app with the `name` and `template` arguments given in the cli command"""
-    project_path = Path(name).resolve()
+def create_app(project: str, name: str, template: TemplateType) -> None:
+    """Create a python project with the specified name and template"""
+
+    project_name = project if project else name
+
+    if not project_name:
+        project_name = click.prompt("What would you like to name your app?")
+
+    if not template:
+        template = click.prompt(
+            "What template would you like to create? (python, fastapi)"
+        )
+
+    project_path = Path(project_name).resolve()
     app_name = project_path.name
 
     try:
