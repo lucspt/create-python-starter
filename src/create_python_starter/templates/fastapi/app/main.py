@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from fastapi_unk import Unk
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -9,8 +8,6 @@ def create_app() -> FastAPI:
     app = FastAPI()
 
     app.add_middleware(CORSMiddleware, allow_credentials=True, allow_methods=["*"])
-
-    Unk(app)
 
     from .routes.root import router as root_router
 
