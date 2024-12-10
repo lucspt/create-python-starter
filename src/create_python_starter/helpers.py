@@ -54,7 +54,7 @@ def create_pyproject_toml_file(
     if template == "fastapi":
         dependencies = [
             "dependencies = [\n",
-            '   "fastapi==0.115.6",\n',
+            '   "fastapi[standard]==0.115.6",\n',
             '   "pydantic-settings>=2.3.4",\n',
             "]\n",
         ]
