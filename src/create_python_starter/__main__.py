@@ -16,6 +16,7 @@ from .types import TemplateType
 
 PYTHON_TEMPLATE = "python"
 FAST_API_TEMPLATE = "fastapi"
+CLICK_TEMPLATE_CHOICE = click.Choice([PYTHON_TEMPLATE, FAST_API_TEMPLATE])
 
 
 @click.command()
@@ -26,7 +27,7 @@ FAST_API_TEMPLATE = "fastapi"
 )
 @click.option(
     "--template",
-    type=click.Choice([PYTHON_TEMPLATE, FAST_API_TEMPLATE]),
+    type=CLICK_TEMPLATE_CHOICE,
     help="The project's template",
 )
 def create_app(project: str, name: str, template: TemplateType) -> None:
@@ -35,11 +36,13 @@ def create_app(project: str, name: str, template: TemplateType) -> None:
     project_name = project if project else name
 
     if not project_name:
-        project_name = click.prompt("What would you like to name your app?")
+        project_name = click.prompt("What would you like to name your app?", type=str)
 
     if not template:
         template = click.prompt(
-            "What template would you like to create? (python, fastapi)"
+            "What template would you like to create?",
+            type=CLICK_TEMPLATE_CHOICE,
+            show_choices=True,
         )
 
     project_path = Path(project_name).resolve()
