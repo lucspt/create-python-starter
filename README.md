@@ -17,7 +17,7 @@ First, you will have to [install pipx](https://pipx.pypa.io/stable/installation/
 Once you have it installed you can run:
 
 ```text
-pipx install https://github.com/lucspt/create-python-starter
+pipx install git+https://github.com/lucspt/create-python-starter
 ```
 
 ## Usage
