@@ -40,13 +40,15 @@ And then what template you would like to create:
 What template would you like to create? (python, fastapi):
 ```
 
-To answer, just type and click enter.
+To answer, just type and enter.
 
 You can also use command line arguments for a non-interactive experience:
 
 ```text
-create_python_starter --name [project-name] --template [project-template]
+create_python_starter [PROJECT_NAME] --name [project-name] --template [project-template]
 ```
+
+Note that you can specify the project name as a positional argument or with the `--name` option.
 
 Here are all the available options:
 
