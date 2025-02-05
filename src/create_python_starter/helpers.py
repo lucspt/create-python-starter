@@ -55,6 +55,7 @@ def create_pyproject_toml_file(
         dependencies = [
             "dependencies = [\n",
             '   "fastapi[standard]==0.115.8",\n',
+            '   "fastapi_essentials>=0.2.0",\n',
             '   "pydantic-settings>=2.7.1",\n',
             "]\n",
         ]
@@ -256,7 +257,10 @@ def create_git_repo(project_directory: Path) -> None:
         exec_command(["git", "init", "."], cwd=project_directory)
         exec_command(["git", "add", "-A"], cwd=project_directory)
         exec_command(["sh", "./scripts/prepare"], cwd=project_directory)
-        exec_command(["git", "commit", "-am", "Initial commit", "--no-verify"], cwd=project_directory)
+        exec_command(
+            ["git", "commit", "-am", "Initial commit", "--no-verify"],
+            cwd=project_directory,
+        )
     except Exception as e:
         raise Exception(
             f"""
