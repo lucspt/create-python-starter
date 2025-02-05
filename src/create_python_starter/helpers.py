@@ -54,8 +54,8 @@ def create_pyproject_toml_file(
     if template == "fastapi":
         dependencies = [
             "dependencies = [\n",
-            '   "fastapi[standard]==0.115.6",\n',
-            '   "pydantic-settings>=2.3.4",\n',
+            '   "fastapi[standard]==0.115.8",\n',
+            '   "pydantic-settings>=2.7.1",\n',
             "]\n",
         ]
     else:
@@ -78,17 +78,17 @@ def create_pyproject_toml_file(
 
         dev_dependencies = [
             "dev-dependencies = [\n",
-            '   "mypy>=1.10.1",\n',
-            '   "pytest-cov>=5.0.0",\n',
-            '   "ruff>=0.5.0",\n',
-            '   "mkdocs>=1.6.0",\n',
-            '   "mkdocstrings[python]>=0.25.1",\n',
-            '   "mkdocs-material>=9.5.29",\n',
-            '   "commitlint>=1.1.0",\n',
+            '   "mypy>=1.15.0",\n',
+            '   "pytest-cov>=6.0.0",\n',
+            '   "ruff>=0.9.4",\n',
+            '   "mkdocs>=1.6.1",\n',
+            '   "mkdocstrings[python]>=0.28.0",\n',
+            '   "mkdocs-material>=9.6.2",\n',
+            '   "commitlint>=1.3.0",\n',
         ]
 
         if template == "fastapi":
-            dev_dependencies.append('   "httpx>=0.27.0",\n')
+            dev_dependencies.append('   "httpx>=0.28.1",\n')
 
         dev_dependencies.append("]\n\n")
 
