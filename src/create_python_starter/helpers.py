@@ -143,7 +143,7 @@ def create_pyproject_toml_file(
         f.writelines(
             [
                 "[build-system]\n",
-                'requires = ["hatchling"]\n',
+                'requires = ["hatchling==1.26.3", "hatch-vcs"]\n',
                 'build-backend = "hatchling.build"\n',
                 "\n",
             ]
