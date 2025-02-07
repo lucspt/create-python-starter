@@ -69,7 +69,7 @@ def create_app(project: str, name: str, template: TemplateType) -> None:
             package_dir = package_dir.replace(project_path / "src" / package_name)
             Path(package_dir / "py.typed").touch()
 
-        pin_python_version(project_path, "3.12.3")
+        pin_python_version(project_path, "3.12.8")
 
         devdeps, deps = create_pyproject_toml_file(
             project_path,
