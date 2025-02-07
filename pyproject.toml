@@ -1,6 +1,6 @@
 [project]
 name = "create_python_starter"
-version = "1.0.3"
+version = "1.1.0"
 description = "A cli tool for scaffolding unk python projects."
 authors = [
     { name = "lucspt", email = "149544385+lucspt@users.noreply.github.com" }
