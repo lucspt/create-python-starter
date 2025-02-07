@@ -108,8 +108,8 @@ def create_pyproject_toml_file(
         if template == "fastapi":
             lines.extend(
                 [
-                    """prod = { cmd = "fastapi run", env = { FAST_API_ENV = "production" }}\n""",
-                    """dev = { cmd = "fastapi dev app/main.py", env = { FAST_API_ENV = "development" } }\n""",
+                    """prod = { cmd = "fastapi run", env = { FASTAPI_ENV = "production" }}\n""",
+                    """dev = { cmd = "fastapi dev app/main.py", env = { FASTAPI_ENV = "development" } }\n""",
                 ]
             )
 
