@@ -56,7 +56,7 @@ def create_pyproject_toml_file(
             "dependencies = [\n",
             '   "fastapi[standard]==0.115.8",\n',
             '   "fastapi_essentials>=0.2.2",\n',
-            '   "pydantic-settings>=2.7.1",\n',
+            '   "pydantic-settings>=2.8.0",\n',
             "]\n",
         ]
     else:
@@ -81,10 +81,10 @@ def create_pyproject_toml_file(
             "dev-dependencies = [\n",
             '   "mypy>=1.15.0",\n',
             '   "pytest-cov>=6.0.0",\n',
-            '   "ruff>=0.9.4",\n',
+            '   "ruff>=0.9.7",\n',
             '   "mkdocs>=1.6.1",\n',
-            '   "mkdocstrings[python]>=0.28.0",\n',
-            '   "mkdocs-material>=9.6.2",\n',
+            '   "mkdocstrings[python]>=0.28.2",\n',
+            '   "mkdocs-material>=9.6.5",\n',
             '   "commitlint>=1.3.0",\n',
         ]
 
